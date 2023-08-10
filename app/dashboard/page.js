@@ -1,3 +1,5 @@
+'use client'
+import React from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 const fetchPost = async () => {
@@ -10,9 +12,9 @@ const fetchPost = async () => {
 
 const DashboardContent = () => {
   const { data, isLoading, error } = useQuery("post", fetchPost, {
-    retry: 1, // Número de reintentos si la consulta falla
-    staleTime: 1000 * 60 * 60 * 24, // Tiempo en milisegundos que los datos se considerarán frescos
-    cacheTime: 1000 * 60 * 60 * 24 * 30, // Tiempo en milisegundos que los datos se mantendrán en caché
+    retry: 1,
+    staleTime: 1000 * 60 * 60 * 24, 
+    cacheTime: 1000 * 60 * 60 * 24 * 30,
   });
 
   if (isLoading) return <p>Loading!...</p>;
@@ -30,7 +32,7 @@ const Dashboard = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: false, // Evita la actualización cuando la ventana esté enfocada
+        refetchOnWindowFocus: false,
       },
     },
   });
